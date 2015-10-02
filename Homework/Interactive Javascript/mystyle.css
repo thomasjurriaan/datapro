@@ -1,0 +1,9 @@
+body {
+    background-color: #EEEEEE;
+}
+
+#canvas, #crosscanvas {
+	background:#FFFFFF;
+    display:block;
+    position:relative;
+}
