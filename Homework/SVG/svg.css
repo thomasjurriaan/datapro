@@ -1,0 +1,39 @@
+/* continent color */
+.sa
+{
+   fill: #CD2626;
+   stroke:#ffffff;
+   stroke-width:0.5;
+}
+/* country colors, works on ID*/
+#su, #sr, #uy 
+{
+   fill: #00ff00;
+   stroke:#ffffff;
+   stroke-width:0.5;
+   fill-rule:evenodd;
+}
+
+#py, #bo
+{
+   fill: #00ffE0;
+   stroke:#ffffff;
+   stroke-width:0.5;
+   fill-rule:evenodd;
+}
+
+#fr, #co
+{
+   fill: #FFa500;
+   stroke:#ffffff;
+   stroke-width:0.5;
+   fill-rule:evenodd;
+}
+
+#pe, #gy
+{
+   fill: #00AAAA;
+   stroke:#ffffff;
+   stroke-width:0.5;
+   fill-rule:evenodd;
+}
