@@ -1475,8 +1475,12 @@
     <h1>Het weer in de bilt in het milleniumjaar 2000</h1>
     <h2>De grafiek hieronder geeft het temperatuurverloop aan in het jaar 2000.</h2>
     <p> Voor elke dag in het jaar is gekeken naar de maximumtemperatuur. De data is verkregen via het <a href="http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi">KNMI</a> en betreft de locatie De Bilt, de hoofvestiging van het KNMI.</p>
-    <canvas ID = "mycanvas" width = "1400" height = "400" style></canvas>
-    <canvas ID = "crosscanvas" width = "1400" height = "400"></canvas> 
+    <div ID = "container"> 
+      <canvas ID = "mycanvas" width = "1400" height = "400" style></canvas>
+      <canvas ID = "crosscanvas" width = "1400" height = "400"></canvas> 
+      <div ID = "tempLabel"></div>
+      <div ID = "dateLabel"></div>
+    </div>
     <script src="interactive-script.js"></script>
 
    </body>

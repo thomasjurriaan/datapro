@@ -41,6 +41,8 @@ var UpperYbound = ((3/4) * canvas.height)
 
 // Set begin point of the dataline in the graph
 ctx.moveTo(LowerXbound, UpperYbound - maxtemp[0])
+
+datalist = [];
 // Loop over the lists and draw lines between data points.
 for(var i = 1; i < maxtemp.length; i++)
 {    
@@ -49,11 +51,14 @@ for(var i = 1; i < maxtemp.length; i++)
     var transformY = createTransform([Math.min.apply(null, maxtemp), Math.max.apply(null, maxtemp)], [LowerYbound, UpperYbound]);
     var X_coordinate = transformX(i);
     var Y_coordinate = UpperYbound + LowerYbound - transformY(maxtemp[i]);
+    datapoint = [X_coordinate, Y_coordinate, date[i], maxtemp[i]];
+    datalist += datapoint;
     // Draw lines
     ctx.lineTo(X_coordinate, Y_coordinate);
     ctx.stroke();
     ctx.moveTo(X_coordinate, Y_coordinate);
 }
+console.log(datalist);
 
 // New settings for other lines
 ctx.beginPath();
@@ -120,20 +125,41 @@ function getMousePos(crosscanvas, evt) {
         y: Math.round((evt.clientY-rect.top)/(rect.bottom-rect.top)*crosscanvas.height)
     };
 }
-canvas.addEventListener('mousemove', function(evt) {
-var mousePos = getMousePos(crosscanvas, evt);
-console.log(mousePos.x);
-crossctx.moveTo(mousePos.x,mousePos.y);
-crossctx.lineTo(LowerXbound, mousePos.y);
-crossctx.lineTo(UpperXbound, mousePos.y);
-crossctx.lineTo(LowerYbound, mousePos.x);
-crossctx.lineTo(LowerYbound, mousePos.x);
-crossctx.stroke();
-crossctx.clearRect( 0,canvas.height, 100000,100000);
-console.log("hendrik")
+
+// draw and reset crosshair
+crosscanvas.addEventListener('mousemove', function(evt) {
+    crosscanvas.width = crosscanvas.width;
+    var mousePos = getMousePos(crosscanvas, evt);
+    console.log(mousePos.x, mousePos.y);
+    crossctx.moveTo(LowerXbound, mousePos.y);
+    crossctx.lineTo(UpperXbound, mousePos.y);
+    crossctx.moveTo(mousePos.x, LowerYbound - padding/2)
+    crossctx.lineTo(mousePos.x, UpperYbound + padding/2);
+    crossctx.stroke();
 }, false);
 
+// draw tooltip
+var tempTag = "";
+var dateTag = "";
+crosscanvas.addEventListener('mousemove', function(evt) {
+    var mousePos = getMousePos(crosscanvas, evt);
+    var point = 0;
+    for(var i = 0; i < datalist.length; i++)
+    {
+        if(mousePos.x >= datalist[i][1] && mousePos.x <= datalist[i+1][1])
+        {
+            var dateTag = datalist[i][3].toString();
+            var tempTag = datalist[i][4].toString();
+            point = i;
+        };
+    };
+    crossctx.fillText(dateTag, datalist[point][1] - 100, datalist[point][2]);
 
-
-
-
+    //var dateLabel = document.getElementById("dateLabel");
+    //var tempLabel = document.getElementById("tempLabel");
+    //dateLabel.x = datalist[point][1] - 100;
+    //dateLabel.y = datalist[point][2];
+    //dateLabel.width = 100;
+    //dateLabel.height = 20;
+    //fillStyle = 
+}, false);

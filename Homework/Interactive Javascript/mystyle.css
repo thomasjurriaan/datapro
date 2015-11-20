@@ -2,8 +2,15 @@ body {
     background-color: #EEEEEE;
 }
 
-#canvas, #crosscanvas {
-	background:#FFFFFF;
-    display:block;
-    position:relative;
+#container {
+  position: relative;
+}
+#container canvas, #crosscanvas {
+  position: absolute;
+}
+canvas {
+  border: 1px solid black;
+  #tempLabel, #dateLabel {
+  	position: absolute;
+  }
 }
